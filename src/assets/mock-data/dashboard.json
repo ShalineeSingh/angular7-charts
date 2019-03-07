@@ -1,0 +1,21 @@
+{
+  "workflows": [{
+      "name": "Login",
+      "modules": [
+        "auth-server",
+        "onboarding",
+        "app-gateway",
+        "ui server"
+      ]
+    },
+    {
+      "name": "Login1",
+      "modules": [
+        "auth-server",
+        "onboarding",
+        "app-gateway",
+        "ui server"
+      ]
+    }
+  ]
+}

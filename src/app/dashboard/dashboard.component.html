@@ -1,15 +1,27 @@
-<p>
-  dashboard works!
-</p>
-<a [routerLink]="['/details/workflow']">
-  <span [innerText]="'Workflow'"></span>
-</a>
-<a [routerLink]="['/details/timeline']">
-  <span [innerText]="'Timeline'"></span>
-</a>
-<a [routerLink]="['/details/request']">
-  <span [innerText]="'Request'"></span>
-</a>
-<a [routerLink]="['/details/map']">
-  <span [innerText]="'Map'"></span>
-</a>
+<div class="row">
+  <div class="col-sm-12 nav-bar-wrapper">
+    <h5 class="text-center">Workflows</h5>
+  </div>
+</div>
+<div class="container">
+  <div id="panel-group">
+    <div class="panel panel-default" *ngFor="let workflow of workflow_list?.workflows; let i = index">
+      <div class="panel-heading cursor-pointer" (click)="toggleAccordion(i)">
+        <h5 class="panel-title">
+          <i class='glyphicon' [class.glyphicon-chevron-right]="i != current" [class.glyphicon-chevron-down]="i == current"></i>
+          <span [innerText]="workflow.name"></span>
+          <span class="pull-right">
+            <button type="button" class="btn btn-xs btn-primary" (click)="goToDetails($event, workflow)">View Details</button>
+          </span>
+        </h5>
+      </div>
+      <div id="collapse1" class="panel-collapse" [class.collapse]='current != i'>
+        <div class="panel-body">
+          <div *ngFor="let module of workflow.modules">
+            <p [innerText]="module"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

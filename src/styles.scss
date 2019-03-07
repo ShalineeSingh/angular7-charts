@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: gray;
+  min-height: 100vh;
+}
+
+.fadein,
+.fadeout {
+  opacity: 0;
+  -moz-transition: opacity 0.4s ease-in-out;
+  -o-transition: opacity 0.4s ease-in-out;
+  -webkit-transition: opacity 0.4s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fadein {
+  opacity: 1;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a {
+  color: #222222;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  &,
+  &:hover,
+  &.active,
+  &:focus {
+    border: transparent;
+    outline: 0;
+  }
+}

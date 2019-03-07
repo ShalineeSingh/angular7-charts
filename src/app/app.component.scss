@@ -1,0 +1,24 @@
+.top-bar-wrapper {
+  background-color: #5f9ea0;
+  color: white;
+  position: sticky;
+  top: 0;
+  .heading {
+    margin-top: 10px;
+  }
+}
+
+a {
+  color: #222222;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  &,
+  &:hover,
+  &.active,
+  &:focus {
+    border: transparent;
+    outline: 0;
+  }
+}
