@@ -1,56 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AppService } from '../../services/app.services';
 @Component({
   selector: 'app-api-timelines',
   templateUrl: './api-timelines.component.html',
-  styleUrls: ['./api-timelines.component.scss']
+  styleUrls: ['./api-timelines.component.scss'],
+  providers: [AppService]
 })
 export class ApiTimelinesComponent implements OnInit {
+  loader: boolean = true;
+  timeline_graph: any;
   single: any[];
-  multi: any[] = [
-    {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7300000
-        },
-        {
-          "name": "2011",
-          "value": 8940000
-        }
-      ]
-    },
-
-    {
-      "name": "USA",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7870000
-        },
-        {
-          "name": "2011",
-          "value": 8270000
-        }
-      ]
-    },
-
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        }
-      ]
-    }
-  ];
-
   view: any[] = [700, 400];
 
   // options
@@ -66,9 +25,18 @@ export class ApiTimelinesComponent implements OnInit {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-  constructor() { }
+  constructor(private appService: AppService) { }
 
   ngOnInit() {
+    this.getTimelineDetails();
+  }
+  getTimelineDetails() {
+    this.loader = true;
+    this.appService.getTimelineDetailsService().subscribe((response: any) => {
+      this.loader = false;
+      this.timeline_graph = response.data;
+      console.log(this.timeline_graph);
+    })
   }
   onSelect(event) {
     console.log(event);

@@ -8,5 +8,16 @@ export class AppService {
   getDashboardData(query_params?: any, params?: any) {
     return this.httpClient.get('./assets/mock-data/dashboard.json');
   }
-
+  getWorkflowDetails(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/workflow-details.json');
+  }
+  getTimelineDetailsService(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/timeline-details.json');
+  }
+  getRequestMapService(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/request-heat-map.json');
+  }
+  getCommunicationMapService(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/communication-map.json');
+  }
 }
