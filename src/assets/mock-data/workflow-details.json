@@ -3,30 +3,51 @@
     "nodes": [{
       "id": "start",
       "label": "scan",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x0"
     }, {
       "id": "1",
       "label": "Event#a",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x1"
     }, {
       "id": "2",
       "label": "Event#x",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x2"
     }, {
       "id": "3",
       "label": "Event#b",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x3"
     }, {
       "id": "4",
       "label": "Event#c",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x4"
     }, {
       "id": "5",
       "label": "Event#y",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x5"
     }, {
       "id": "6",
       "label": "Event#z",
+      "pass": 2,
+      "fail": 3,
+      "total": 5,
       "position": "x6"
     }],
     "links": [{

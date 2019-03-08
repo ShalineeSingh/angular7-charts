@@ -31,6 +31,6 @@ export class DashboardComponent implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     console.log(workflow);
-    this.router.navigate(['/details', { 'workflow': workflow }]);
+    this.router.navigate(['/details/workflow', { 'workflow': workflow }]);
   }
 }

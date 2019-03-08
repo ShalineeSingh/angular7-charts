@@ -57,3 +57,22 @@
     stroke: #666 !important;
   }
 }
+
+.ngx-charts-outer {
+  display: table !important;
+}
+
+.ngx-charts {
+  float: left !important;
+  position: relative !important;
+  display: table-footer-group !important;
+}
+
+.chart-legend {
+  float: right !important;
+  display: table-header-group !important;
+}
+
+.text {
+  color: red;
+}

@@ -20,4 +20,7 @@ export class AppService {
   getCommunicationMapService(query_params?: any, params?: any) {
     return this.httpClient.get('./assets/mock-data/communication-map.json');
   }
+  getErrorLogsService(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/error-log.json');
+  }
 }
