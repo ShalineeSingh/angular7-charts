@@ -30,4 +30,7 @@ export class WorkflowDetailsComponent implements OnInit {
       console.log(this.hierarchialGraph);
     })
   }
+  onSelect(event) {
+    console.log(event);
+  }
 }
