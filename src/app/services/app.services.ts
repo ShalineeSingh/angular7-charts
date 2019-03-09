@@ -9,14 +9,14 @@ export class AppService {
   getDashboardData(query_params?: any, params?: any) {
     return this.httpClient.get('./assets/mock-data/dashboard.json');
   }
-  // getWorkflowDetails(query_params?: any, params?: any) {
-  //   return this.httpClient.get(this.ip + '/workflow/workflow-detail/', {
-  //     params: query_params
-  //   });
-  // }
   getWorkflowDetails(query_params?: any, params?: any) {
-    return this.httpClient.get('./assets/mock-data/workflow-details.json');
+    return this.httpClient.get(this.ip + '/workflow/workflow-detail/', {
+      params: query_params
+    });
   }
+  // getWorkflowDetails(query_params?: any, params?: any) {
+  //   return this.httpClient.get('./assets/mock-data/workflow-details.json');
+  // }
   getTimelineDetailsService(query_params?: any, params?: any) {
     return this.httpClient.get('./assets/mock-data/timeline-details.json');
   }

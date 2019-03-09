@@ -4,6 +4,9 @@
       <div *ngIf="loader">
         <h3>Loading...</h3>
       </div>
+      <div *ngIf="!loader && no_data_found">
+        <h3> No data found</h3>
+      </div>
       <div *ngIf="!loader">
         <ngx-graph class="chart-container" [autoScale]="autoScale" [view]="view" [links]="hierarchialGraph?.links" [nodes]="hierarchialGraph?.nodes"
           [legend]="show_legend" [curve]="curve" [animations]="false" [draggingEnabled]="false" [enableZoom]="true" (select)="onSelect($event)">

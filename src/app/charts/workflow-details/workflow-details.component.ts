@@ -4,6 +4,7 @@ import {
 
 import * as shape from 'd3-shape';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AppService } from '../../services/app.services';
 
 @Component({
@@ -22,12 +23,16 @@ export class WorkflowDetailsComponent implements OnInit {
   autoScale: boolean = true;
   curve = shape.curveBundle.beta(1);
   view: any[] = [1300, 300];
+  to_time_param: number;
+  from_time_param: number;
   // curve = shape.curveLinear;
 
-  constructor(private appService: AppService) { }
-  to_time: Date = new Date(new Date().setHours(new Date().getHours() - 1));
-  from_time: Date = new Date();
+  constructor(private appService: AppService, private route: ActivatedRoute, ) { }
+  to_time: number = new Date().setHours(new Date().getHours() - 1);
+  from_time: number = +new Date();
   ngOnInit() {
+    this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
+    this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
   }
 
   ngAfterViewInit() {
@@ -36,12 +41,12 @@ export class WorkflowDetailsComponent implements OnInit {
   getWorkflowList() {
     this.loader = true;
     let query_params = {
-      'startTime': +this.to_time,
-      'endTime': +this.from_time,
+      'startTime': this.from_time_param ? this.from_time_param : this.to_time,
+      'endTime': this.to_time_param ? this.to_time_param : this.from_time,
       'workflow': 'user'
     }
     this.appService.getWorkflowDetails(query_params).subscribe((response: any) => {
-      if (response) {
+      if (Object.keys(response).length > 0) {
         this.createDataForGraph(response);
         console.log(this.hierarchialGraph);
       } else {
