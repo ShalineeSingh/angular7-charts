@@ -2,8 +2,8 @@
   <div class="col-xs-12">
     <div id="workflow-chart">
       <div *ngIf="!loader">
-        <ngx-graph class="chart-container" [view]="view" [links]="hierarchialGraph?.links" [nodes]="hierarchialGraph?.nodes" [legend]="true"
-          [curve]="curve" [animations]="false" [draggingEnabled]="false" [enableZoom]="false" (select)="onSelect($event)">
+        <ngx-graph class="chart-container" [view]="view" [links]="hierarchialGraph?.links" [nodes]="hierarchialGraph?.nodes" [legend]="show_legend"
+          [curve]="curve" [animations]="false" [draggingEnabled]="false" [enableZoom]="true" (select)="onSelect($event)">
           <ng-template #defsTemplate>
             <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
               <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
@@ -11,8 +11,8 @@
           </ng-template>
 
           <ng-template #nodeTemplate let-node>
-            <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipType]="'tooltip'" [tooltipTitle]="node.position">
-              <svg:rect [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.options.color" />
+            <svg:g class="node" ngx-tooltip [tooltipPlacement]="'top'" [tooltipType]="'tooltip'" [tooltipTitle]="node.label">
+              <svg:rect [attr.width]="node.width" [attr.height]="node.height" [attr.fill]="node.color" />
               <svg:text alignment-baseline="central" [attr.x]="10" [attr.y]="node.height / 2">{{node.label}}</svg:text>
             </svg:g>
           </ng-template>

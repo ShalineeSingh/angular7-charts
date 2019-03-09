@@ -42,5 +42,4 @@ export class RequestMapComponent implements OnInit {
   onSelect(event) {
     console.log(event);
   }
-
 }

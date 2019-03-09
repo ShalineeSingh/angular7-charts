@@ -1,12 +1,12 @@
 {
   "data": [{
-      "name": "Onboarding",
+      "name": "2PM-3PM",
       "series": [{
-          "name": "2PM-3PM",
+          "name": "Onboarding",
           "value": 3
         },
         {
-          "name": "3PM-4PM",
+          "name": "Onboarding",
           "value": 4
         }
       ]

@@ -1,76 +1,47 @@
 {
-  "data": {
-    "nodes": [{
-      "id": "start",
-      "label": "scan",
-      "pass": 2,
-      "fail": 3,
-      "total": 5
+  "600": {
+    "graphNodeInfoModels": [{
+      "spanId": "606",
+      "exception": "exception6"
     }, {
-      "id": "1",
-      "label": "Event#a",
-      "pass": 2,
-      "fail": 3,
-      "total": 5
+      "spanId": "607"
     }, {
-      "id": "2",
-      "label": "Event#x",
-      "pass": 2,
-      "fail": 3,
-      "total": 5,
-      "position": "x2"
-    }, {
-      "id": "3",
-      "label": "Event#b",
-      "pass": 2,
-      "fail": 3,
-      "total": 5,
-      "position": "x3"
-    }, {
-      "id": "4",
-      "label": "Event#c",
-      "pass": 2,
-      "fail": 3,
-      "total": 5,
-      "position": "x4"
-    }, {
-      "id": "5",
-      "label": "Event#y",
-      "pass": 2,
-      "fail": 3,
-      "total": 5,
-      "position": "x5"
-    }, {
-      "id": "6",
-      "label": "Event#z",
-      "pass": 2,
-      "fail": 3,
-      "total": 5,
-      "position": "x6"
+      "spanId": "608"
     }],
-    "links": [{
-      "source": "start",
-      "target": "1",
-      "label": "Process#1"
+    "nodeLinks": [{
+      "spanId": "606",
+      "parentSpanId": "6"
+    }]
+  },
+  "601": {
+    "graphNodeInfoModels": [{
+      "spanId": "606",
+      "exception": "exception6"
     }, {
-      "source": "start",
-      "target": "2",
-      "label": "Process#2"
+      "spanId": "607",
+      "exception": "exception6.1"
     }, {
-      "source": "1",
-      "target": "3",
-      "label": "Process#3"
+      "spanId": "608",
+      "exception": "exception8"
+    }],
+    "nodeLinks": [{
+      "spanId": "607",
+      "parentSpanId": "6"
+    }]
+  },
+  "602": {
+    "graphNodeInfoModels": [{
+      "spanId": "606",
+      "exception": "exception6"
     }, {
-      "source": "2",
-      "target": "4",
-      "label": "Process#4"
+      "spanId": "607"
     }, {
-      "source": "2",
-      "target": "6",
-      "label": "Process#6"
-    }, {
-      "source": "3",
-      "target": "5"
+      "spanId": "608",
+      "exception": "exception8"
+    }],
+    "nodeLinks": [{
+      "spanId": "608",
+      "parentSpanId": "6"
     }]
   }
 }
