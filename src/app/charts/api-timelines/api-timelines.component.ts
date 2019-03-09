@@ -9,7 +9,6 @@ import { AppService } from '../../services/app.services';
 export class ApiTimelinesComponent implements OnInit {
   loader: boolean = true;
   timeline_graph: any;
-  single: any[];
   view: any[] = [700, 400];
 
   // options
@@ -25,6 +24,11 @@ export class ApiTimelinesComponent implements OnInit {
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
+
+  // line, area
+  autoScale = true;
+
+
   constructor(private appService: AppService) { }
 
   ngOnInit() {

@@ -26,10 +26,16 @@
                   </a>
                 </li>
                 <li routerLinkActive="active">
+                  <a [routerLink]="['/details/usage']">
+                    <span [innerText]="'Workflow Usage'"></span>
+                  </a>
+                </li>
+                <li routerLinkActive="active">
                   <a [routerLink]="['/details/map']">
                     <span [innerText]="'Map'"></span>
                   </a>
                 </li>
+
               </ul>
 
             </nav>

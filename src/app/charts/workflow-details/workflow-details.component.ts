@@ -19,12 +19,14 @@ export class WorkflowDetailsComponent implements OnInit {
   loader: boolean = true;
   no_data_found: boolean = false;
   show_legend: boolean = false;
+  autoScale: boolean = true;
   curve = shape.curveBundle.beta(1);
   view: any[] = [1300, 300];
   // curve = shape.curveLinear;
 
   constructor(private appService: AppService) { }
-
+  to_time: Date = new Date(new Date().setHours(new Date().getHours() - 1));
+  from_time: Date = new Date();
   ngOnInit() {
   }
 
@@ -33,8 +35,12 @@ export class WorkflowDetailsComponent implements OnInit {
   }
   getWorkflowList() {
     this.loader = true;
-    this.appService.getWorkflowDetails().subscribe((response: any) => {
-      // this.hierarchialGraph = response;
+    let query_params = {
+      'startTime': +this.to_time,
+      'endTime': +this.from_time,
+      'workflow': 'user'
+    }
+    this.appService.getWorkflowDetails(query_params).subscribe((response: any) => {
       if (response) {
         this.createDataForGraph(response);
         console.log(this.hierarchialGraph);
@@ -51,10 +57,8 @@ export class WorkflowDetailsComponent implements OnInit {
 
     let api_keys = Object.keys(response);
     if (api_keys.length > 0) {
-      api_keys.forEach(api => {
-        temp_nodes = temp_nodes.concat(response[api].graphNodeInfoModels);
-        temp_links = temp_links.concat(response[api].nodeLinks);
-      });
+      temp_nodes = temp_nodes.concat(response[api_keys[0]].nodeInfoModels);
+      temp_links = temp_links.concat(response[api_keys[0]].nodeLinks);
     }
     if (temp_nodes.length > 0) {
       let flags = {};
@@ -102,20 +106,20 @@ export class WorkflowDetailsComponent implements OnInit {
     this.hierarchialGraph.nodes = nodes;
 
   }
-  getErrorLogs(event: any) {
-    this.appService.getErrorLogsService().subscribe((response: any) => {
-      this.error_logs = response.data;
-      console.log(this.error_logs);
-    })
+  getErrorLogs(id: any) {
+    let item = this.hierarchialGraph.nodes.find(i => i.id === id);
+    console.log(item);
+    this.error_logs = item;
+
   }
   onSelect(event) {
-    this.getErrorLogs(event);
+    console.log(event);
+    this.getErrorLogs(event.id);
   }
   _getColor(currentValue, maxValue) {
     let percent = 100 - (currentValue / maxValue) * 100;
     let r = percent < 50 ? 255 : Math.floor(255 - (percent * 2 - 100) * 255 / 100);
     let g = percent > 50 ? 255 : Math.floor((percent * 2) * 255 / 100);
-    console.log('rgb(' + r + ',' + g + ',0)');
     return 'rgb(' + r + ',' + g + ',0)';
   }
 }

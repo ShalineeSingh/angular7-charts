@@ -1,9 +1,12 @@
 <div class="row">
   <div class="col-xs-12">
     <div id="workflow-chart">
+      <div *ngIf="loader">
+        <h3>Loading...</h3>
+      </div>
       <div *ngIf="!loader">
-        <ngx-graph class="chart-container" [view]="view" [links]="hierarchialGraph?.links" [nodes]="hierarchialGraph?.nodes" [legend]="show_legend"
-          [curve]="curve" [animations]="false" [draggingEnabled]="false" [enableZoom]="true" (select)="onSelect($event)">
+        <ngx-graph class="chart-container" [autoScale]="autoScale" [view]="view" [links]="hierarchialGraph?.links" [nodes]="hierarchialGraph?.nodes"
+          [legend]="show_legend" [curve]="curve" [animations]="false" [draggingEnabled]="false" [enableZoom]="true" (select)="onSelect($event)">
           <ng-template #defsTemplate>
             <svg:marker id="arrow" viewBox="0 -5 10 10" refX="8" refY="0" markerWidth="4" markerHeight="4" orient="auto">
               <svg:path d="M0,-5L10,0L0,5" class="arrow-head" />
@@ -31,16 +34,18 @@
 
         </ngx-graph>
         <div class="col-xs-12">
-          <table class="table table-striped" *ngIf="error_logs && error_logs.length > 0">
+          <table class="table table-striped" *ngIf="error_logs && error_logs.exception && error_logs.exception.length > 0">
             <tr>
               <th>Id</th>
               <th>Timestamp</th>
               <th>Error Log</th>
             </tr>
-            <tr *ngFor="let log of error_logs; let i = index;">
-              <td [innerText]="log.id"></td>
-              <td [innerText]="log.timestamp | date:'medium'"></td>
-              <td [innerText]="log.errorLog"></td>
+            <tr>
+              <td [innerText]="error_logs.id"></td>
+              <td [innerText]="error_logs.timestamp | date:'medium'"></td>
+              <td>
+                <p *ngFor="let log of error_logs.exception; let i = index;">{{log}}</p>
+              </td>
             </tr>
           </table>
         </div>

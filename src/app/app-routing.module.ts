@@ -8,6 +8,7 @@ import { ApiTimelinesComponent } from './charts/api-timelines/api-timelines.comp
 import { RequestMapComponent } from './charts/request-map/request-map.component';
 import { CommunicationMapComponent } from './charts/communication-map/communication-map.component';
 import { TimeFilterComponent } from './time-filter/time-filter.component';
+import { WorkflowUsageComponent } from './charts/workflow-usage/workflow-usage.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,11 @@ const routes: Routes = [
         }
       },
       {
+        path: 'usage', component: WorkflowUsageComponent, data: {
+          breadcrumb: 'WorkflowUsageComponent'
+        }
+      },
+      {
         path: 'map', component: CommunicationMapComponent, data: {
           breadcrumb: 'CommunicationMapComponent'
         }
@@ -59,5 +65,6 @@ export const routingComponents = [
   ApiTimelinesComponent,
   RequestMapComponent,
   CommunicationMapComponent,
-  TimeFilterComponent
+  TimeFilterComponent,
+  WorkflowUsageComponent
 ];
