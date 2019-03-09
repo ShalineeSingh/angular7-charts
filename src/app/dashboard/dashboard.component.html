@@ -1,16 +1,27 @@
 <div class="row">
   <div class="col-sm-12 nav-bar-wrapper">
-    <span class="h5">Workflow</span>
-    
-<div class="row">
-  <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
-    <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
-  </div> -->
-  <div class="col-xs-12 col-12 col-md-4 form-group">
-    <input type="text" placeholder="Daterangepicker" class="form-control" bsDaterangepicker>
-  </div>
-</div>
-    
+    <div class="row">
+      <div class="col-md-2">
+        <span class="h5"></span>
+      </div>
+      <div class="col-xs-10 col-md-2 form-group">
+        <p class="calendar-label">To</p>
+        <input type="text" placeholder="Datepicker" [bsValue]="to_date" [(ngModel)]="to_date" class="form-control" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"
+          bsDatepicker>
+      </div>
+      <div class="col-xs-10 col-md-2 form-group">
+        <timepicker [(ngModel)]="to_time"></timepicker>
+      </div>
+      <div class="col-xs-10 col-md-2 form-group">
+        <p class="calendar-label">From</p>
+        <input type="text" placeholder="Datepicker" [bsValue]="from_date" [(ngModel)]="from_date" class="form-control" [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', containerClass: 'theme-dark-blue' }"
+          bsDatepicker>
+      </div>
+      <div class="col-xs-10 col-md-2 form-group">
+        <timepicker [(ngModel)]="from_time"></timepicker>
+      </div>
+    </div>
+
   </div>
 </div>
 <div class="container workflow-wrapper">
@@ -27,11 +38,8 @@
       </div>
       <div id="collapse1" class="panel-collapse" [class.collapse]='current != i'>
         <div class="panel-body">
-
-
-
           <div *ngFor="let module of workflow.modules">
-            <p [innerText]="module"></p>
+            <p [innerText]="'- ' + module"></p>
           </div>
         </div>
       </div>

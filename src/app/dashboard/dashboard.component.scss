@@ -1,9 +1,13 @@
 .nav-bar-wrapper {
   padding: 5px 10px 0 10px;
   background-color: white;
-  color: #5f9ea0;
-  border: 1px solid #5f9ea0;
+  color: #337ab7;
+  border: 1px solid #337ab7;
+  .calendar-label {
+    margin-bottom: 5px;
+  }
 }
-.workflow-wrapper{
-  padding-top:10px;
+
+.workflow-wrapper {
+  padding-top: 10px;
 }
