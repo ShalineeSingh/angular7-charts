@@ -1,39 +1,39 @@
 {
   "data": [{
-      "name": "Germany",
+      "name": "Onboarding",
       "series": [{
-          "name": "2010",
-          "value": 7300000
+          "name": "2PM-3PM",
+          "value": 3
         },
         {
-          "name": "2011",
-          "value": 8940000
+          "name": "3PM-4PM",
+          "value": 4
         }
       ]
     },
 
     {
-      "name": "USA",
+      "name": "ATS",
       "series": [{
-          "name": "2010",
-          "value": 7870000
+          "name": "2PM-3PM",
+          "value": 5
         },
         {
-          "name": "2011",
-          "value": 8270000
+          "name": "3PM-4PM",
+          "value": 6
         }
       ]
     },
 
     {
-      "name": "France",
+      "name": "Data processor",
       "series": [{
-          "name": "2010",
-          "value": 5000002
+          "name": "2PM-3PM",
+          "value": 1
         },
         {
-          "name": "2011",
-          "value": 5800000
+          "name": "3PM-4PM",
+          "value": 5
         }
       ]
     }

@@ -1,9 +1,19 @@
 <div class="row">
   <div class="col-sm-12 nav-bar-wrapper">
-    <h5 class="text-center">Workflows</h5>
+    <span class="h5">Workflow</span>
+    
+<div class="row">
+  <!-- <div class="col-xs-12 col-12 col-md-4 form-group">
+    <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker>
+  </div> -->
+  <div class="col-xs-12 col-12 col-md-4 form-group">
+    <input type="text" placeholder="Daterangepicker" class="form-control" bsDaterangepicker>
   </div>
 </div>
-<div class="container">
+    
+  </div>
+</div>
+<div class="container workflow-wrapper">
   <div id="panel-group">
     <div class="panel panel-default" *ngFor="let workflow of workflow_list?.workflows; let i = index">
       <div class="panel-heading cursor-pointer" (click)="toggleAccordion(i)">
@@ -17,6 +27,9 @@
       </div>
       <div id="collapse1" class="panel-collapse" [class.collapse]='current != i'>
         <div class="panel-body">
+
+
+
           <div *ngFor="let module of workflow.modules">
             <p [innerText]="module"></p>
           </div>

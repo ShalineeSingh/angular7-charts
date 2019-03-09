@@ -12,6 +12,7 @@ import { NgxGraphModule } from '@swimlane/ngx-graph';
 })
 export class CommunicationMapComponent implements OnInit {
   loader: boolean = true;
+   view: any[] = [700, 400];
   hierarchialGraph = { nodes: [], links: [] }
   curve = shape.curveBundle.beta(1);
   // curve = shape.curveLinear;
