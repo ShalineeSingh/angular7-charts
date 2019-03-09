@@ -5,15 +5,13 @@
       "label": "scan",
       "pass": 2,
       "fail": 3,
-      "total": 5,
-      "position": "x0"
+      "total": 5
     }, {
       "id": "1",
       "label": "Event#a",
       "pass": 2,
       "fail": 3,
-      "total": 5,
-      "position": "x1"
+      "total": 5
     }, {
       "id": "2",
       "label": "Event#x",

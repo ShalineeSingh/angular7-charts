@@ -28,6 +28,12 @@ export class DashboardComponent implements OnInit {
     this.current = this.current !== index ? index : -1;
   }
   goToDetails(event: Event, workflow: string) {
+    window['dataLayer'].push({
+      institution: 'Institution',
+      buttonClick: 'add mannually button Clicked',
+      label: 'Add Institution Label',
+      insname: 'Institution Name'
+    });
     event.preventDefault();
     event.stopPropagation();
     console.log(workflow);
