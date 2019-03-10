@@ -31,9 +31,9 @@ export class AppService {
     return this.httpClient.get(this.ip + '/currentNode/workflow-detail');
   }
 
-  // getCommunicationMapService(query_params?: any, params?: any) {
-  //   return this.httpClient.get('./assets/mock-data/communication-map.json');
-  // }
+  getCommunicationMapService(query_params?: any, params?: any) {
+    return this.httpClient.get('./assets/mock-data/communication-map.json');
+  }
   // getErrorLogsService(query_params?: any, params?: any) {
   //   return this.httpClient.get('./assets/mock-data/error-log.json');
   // }
