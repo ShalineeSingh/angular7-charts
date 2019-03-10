@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from '../../services/app.services';
+import { AppService } from '../services/app.services';
 
 @Component({
   selector: 'app-request-map',
@@ -11,7 +11,7 @@ export class RequestMapComponent implements OnInit {
   single: any[];
   loader: boolean = true;
   request_map: any;
-  view: any[] = [700, 400];
+  view: any[] = [1100, 400];
 
   // options
   showXAxis = true;
@@ -24,7 +24,7 @@ export class RequestMapComponent implements OnInit {
   yAxisLabel = 'Population';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#d9534f', '#eea236', '#4cae4c']
   };
   constructor(private appService: AppService) { }
 

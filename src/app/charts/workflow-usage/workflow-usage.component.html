@@ -1,3 +1,18 @@
-<ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="single" [legend]="showLegend" [explodeSlices]="explodeSlices"
-  [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
-</ngx-charts-pie-chart>
+<p *ngIf="workflow_name">Workflow Name : {{workflow_name}}</p>
+<div class="row">
+  <div class="col-xs-12">
+    <div id="workflow-chart">
+      <div *ngIf="loader">
+        <h3>Loading...</h3>
+      </div>
+      <div *ngIf="!loader && no_data_found">
+        <h3> No data found</h3>
+      </div>
+      <div *ngIf="!loader">
+        <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="workflow_usage_data" [legend]="showLegend" [explodeSlices]="explodeSlices"
+          [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+        </ngx-charts-pie-chart>
+      </div>
+    </div>
+  </div>
+</div>

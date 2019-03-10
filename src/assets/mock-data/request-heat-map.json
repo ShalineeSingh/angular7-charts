@@ -1,41 +1,43 @@
 {
   "data": [{
-      "name": "2PM-3PM",
-      "series": [{
-          "name": "Onboarding",
-          "value": 3
-        },
-        {
-          "name": "Onboarding",
-          "value": 4
-        }
-      ]
+      "name": "Day0",
+      "series": []
     },
-
     {
-      "name": "ATS",
-      "series": [{
-          "name": "2PM-3PM",
-          "value": 5
-        },
-        {
-          "name": "3PM-4PM",
-          "value": 6
-        }
-      ]
+      "name": "Day1",
+      "series": []
     },
-
     {
-      "name": "Data processor",
+      "name": "Day2",
+      "series": []
+    },
+    {
+      "name": "Day3",
+      "series": []
+    },
+    {
+      "name": "Day4",
+      "series": []
+    },
+    {
+      "name": "Day5",
       "series": [{
-          "name": "2PM-3PM",
-          "value": 1
-        },
-        {
-          "name": "3PM-4PM",
-          "value": 5
-        }
-      ]
+        "name": "null",
+        "value": 33,
+        "pass": 2,
+        "fail": 2,
+        "total": 4
+      }]
+    },
+    {
+      "name": "Day6",
+      "series": [{
+        "name": "null",
+        "value": 53,
+        "pass": 6,
+        "fail": 9,
+        "total": 15
+      }]
     }
   ]
 }

@@ -1,48 +1,48 @@
 <div class="container-fluid workflow-details-wrapper">
   <div class="row">
     <div class="col-sm-12">
-      <div class="row">
-        <div class="media">
-          <div class="media-left module-list">
-            <!-- <img src="img_avatar1.png" class="media-object" style="width:60px"> -->
-          </div>
-          <div class="media-body">
-            <nav class="navbar navbar-default">
+      <!-- <div class="row"> -->
+      <!-- <div class="media">
+          <div class="media-left module-list"> -->
+      <!-- <img src="img_avatar1.png" class="media-object" style="width:60px"> -->
+      <!-- </div>
+          <div class="media-body"> -->
+      <nav class="navbar navbar-default">
 
-              <ul class="nav navbar-nav">
-                <li routerLinkActive="active">
-                  <a [routerLink]="['/details/workflow']">
-                    <span [innerText]="'Workflow'"></span>
-                  </a>
-                </li>
-                <li routerLinkActive="active">
-                  <a [routerLink]="['/details/timeline']">
-                    <span [innerText]="'Timeline'"></span>
-                  </a>
-                </li>
-                <li routerLinkActive="active">
-                  <a [routerLink]="['/details/request']">
+        <ul class="nav navbar-nav">
+          <li routerLinkActive="active">
+            <a [routerLink]="['/details/workflow']" queryParamsHandling="preserve" preserveFragment>
+              <span [innerText]="'Workflow'"></span>
+            </a>
+          </li>
+          <li routerLinkActive="active">
+            <a [routerLink]="['/details/timeline']" queryParamsHandling="preserve" preserveFragment>
+              <span [innerText]="'Timeline'"></span>
+            </a>
+          </li>
+          <!-- <li routerLinkActive="active">
+                  <a [routerLink]="['/details/request']"  queryParamsHandling="preserve" preserveFragment>
                     <span [innerText]="'Request'"></span>
                   </a>
-                </li>
-                <li routerLinkActive="active">
-                  <a [routerLink]="['/details/usage']">
-                    <span [innerText]="'Workflow Usage'"></span>
-                  </a>
-                </li>
-                <li routerLinkActive="active">
-                  <a [routerLink]="['/details/map']">
+                </li> -->
+          <li routerLinkActive="active">
+            <a [routerLink]="['/details/usage']" queryParamsHandling="preserve" preserveFragment>
+              <span [innerText]="'Workflow Usage'"></span>
+            </a>
+          </li>
+          <!-- <li routerLinkActive="active">
+                  <a [routerLink]="['/details/map']"  queryParamsHandling="preserve" preserveFragment>
                     <span [innerText]="'Map'"></span>
                   </a>
-                </li>
+                </li> -->
 
-              </ul>
+        </ul>
 
-            </nav>
-            <router-outlet></router-outlet>
-          </div>
-        </div>
-      </div>
+      </nav>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
+<!-- </div>
+</div>
+</div> -->

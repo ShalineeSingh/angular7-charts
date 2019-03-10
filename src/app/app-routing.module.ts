@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChartsComponent } from './charts/charts.component';
 import { WorkflowDetailsComponent } from './charts/workflow-details/workflow-details.component';
 import { ApiTimelinesComponent } from './charts/api-timelines/api-timelines.component';
-import { RequestMapComponent } from './charts/request-map/request-map.component';
+import { RequestMapComponent } from './request-map/request-map.component';
 import { CommunicationMapComponent } from './charts/communication-map/communication-map.component';
 import { TimeFilterComponent } from './time-filter/time-filter.component';
 import { WorkflowUsageComponent } from './charts/workflow-usage/workflow-usage.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'details', component: ChartsComponent, data: {},
+    path: 'details', component: ChartsComponent,
     children: [
       {
         path: 'workflow', component: WorkflowDetailsComponent, data: {
@@ -32,21 +32,21 @@ const routes: Routes = [
           breadcrumb: 'ApiTimelinesComponent'
         }
       },
-      {
-        path: 'request', component: RequestMapComponent, data: {
-          breadcrumb: 'RequestMapComponent'
-        }
-      },
+      // {
+      //   path: 'request', component: RequestMapComponent, data: {
+      //     breadcrumb: 'RequestMapComponent'
+      //   }
+      // },
       {
         path: 'usage', component: WorkflowUsageComponent, data: {
           breadcrumb: 'WorkflowUsageComponent'
         }
       },
-      {
-        path: 'map', component: CommunicationMapComponent, data: {
-          breadcrumb: 'CommunicationMapComponent'
-        }
-      }
+      // {
+      //   path: 'map', component: CommunicationMapComponent, data: {
+      //     breadcrumb: 'CommunicationMapComponent'
+      //   }
+      // }
     ]
   }
 

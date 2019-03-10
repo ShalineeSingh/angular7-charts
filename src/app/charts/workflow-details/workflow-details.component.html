@@ -1,3 +1,5 @@
+<p *ngIf="workflow_name">Workflow Name : {{workflow_name}}</p>
+
 <div class="row">
   <div class="col-xs-12">
     <div id="workflow-chart">
@@ -37,17 +39,17 @@
 
         </ngx-graph>
         <div class="col-xs-12">
-          <table class="table table-striped" *ngIf="error_logs && error_logs.exception && error_logs.exception.length > 0">
+          <table class="table table-striped" *ngIf="error_logs && error_logs.exception_array && error_logs.exception_array.length > 0">
             <tr>
               <th>Id</th>
               <th>Timestamp</th>
               <th>Error Log</th>
             </tr>
-            <tr>
-              <td [innerText]="error_logs.id"></td>
-              <td [innerText]="error_logs.timestamp | date:'medium'"></td>
+            <tr *ngFor="let log of error_logs.exception_array; let i = index;">
+              <td [innerText]="log.exception_id"></td>
+              <td [innerText]="log.timeStamp | date:'medium'"></td>
               <td>
-                <p *ngFor="let log of error_logs.exception; let i = index;">{{log}}</p>
+                <p>{{log.exceptions}}</p>
               </td>
             </tr>
           </table>

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div id="workflow-chart">
+      <div *ngIf="loader">
+        <h3>Loading...</h3>
+      </div>
+      <div *ngIf="!loader && no_data_found">
+        <h3> No data found</h3>
+      </div>
+      <div *ngIf="!loader">
+        <h3>Last 7 days</h3>
+        <ngx-charts-heat-map [view]="view" [scheme]="colorScheme" [results]="request_map" [legend]="showLegend" [gradient]="gradient"
+          [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+        </ngx-charts-heat-map>
+      </div>
+    </div>
+  </div>
+</div>

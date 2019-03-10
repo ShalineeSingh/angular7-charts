@@ -1,92 +1,78 @@
 import { Component, OnInit } from '@angular/core';
-
+import { flatMap } from 'rxjs/operators';
+import { interval } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import * as shape from 'd3-shape';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { AppService } from '../../services/app.services';
 @Component({
   selector: 'app-workflow-usage',
   templateUrl: './workflow-usage.component.html',
-  styleUrls: ['./workflow-usage.component.scss']
+  styleUrls: ['./workflow-usage.component.scss'],
+  providers: [AppService]
 })
 export class WorkflowUsageComponent implements OnInit {
 
-
-  ngOnInit() {
-  }
-  single: any[] = [
-    {
-      "name": "Germany",
-      "value": 8940000
-    },
-    {
-      "name": "USA",
-      "value": 5000000
-    },
-    {
-      "name": "France",
-      "value": 7200000
-    }
-  ];
-
-  multi: any[] = [
-    {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7300000
-        },
-        {
-          "name": "2011",
-          "value": 8940000
-        }
-      ]
-    },
-
-    {
-      "name": "USA",
-      "series": [
-        {
-          "name": "2010",
-          "value": 7870000
-        },
-        {
-          "name": "2011",
-          "value": 8270000
-        }
-      ]
-    },
-
-    {
-      "name": "France",
-      "series": [
-        {
-          "name": "2010",
-          "value": 5000002
-        },
-        {
-          "name": "2011",
-          "value": 5800000
-        }
-      ]
-    }
-  ];
-
-
-  view: any[] = [700, 400];
-
-  // options
+  loader: boolean = true;
+  no_data_found: boolean = false;
+  interval: number = 4000;
+  to_time_param: number;
+  from_time_param: number;
+  autoScale: boolean = true;
+  view: any[] = [1300, 300];
   showLegend = true;
-
+  workflow_id_param: any;
+  workflow_name: string;
+  query_params: any = {};
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
-
-  // pie
   showLabels = true;
   explodeSlices = false;
   doughnut = false;
+  workflow_usage_data: any;
+  to_time: number = new Date().setHours(new Date().getHours() - 1);
+  from_time: number = +new Date();
 
-  constructor() {
-    // Object.assign(this, { single, multi })
+  constructor(private appService: AppService, private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
+    this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
+    this.workflow_id_param = this.route.snapshot.paramMap.get('workflow_id');
+    this.workflow_name = this.route.snapshot.paramMap.get('name');
   }
+  ngAfterViewInit() {
+    this.getWorkflowUsage();
+    this.query_params = {
+      'startTime': this.from_time_param ? this.from_time_param : this.to_time,
+      'endTime': this.to_time_param ? this.to_time_param : this.from_time,
+      'workflow': this.workflow_id_param ? this.workflow_id_param : 'user'
+    }
+    interval(this.interval)
+      .pipe(
+        flatMap(() => this.appService.getWorkflowUsageDetails(this.query_params))
+      )
+      .subscribe((response: any) => {
+        if (response) {
+          this.workflow_usage_data = response.data;
+        } else {
+          this.no_data_found = true;
+        }
+        this.loader = false;
+      })
+  }
+  getWorkflowUsage() {
+    this.loader = true;
+    this.appService.getWorkflowUsageDetails(this.query_params).subscribe((response: any) => {
+      if (response) {
+        this.workflow_usage_data = response.data;
+      } else {
+        this.no_data_found = true;
+      }
+      this.loader = false;
+    })
+  };
 
   onSelect(event) {
     console.log(event);

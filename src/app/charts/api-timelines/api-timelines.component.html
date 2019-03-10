@@ -1,4 +1,19 @@
-<ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="timeline_graph" [gradient]="gradient" [xAxis]="showXAxis"
-  [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
-</ngx-charts-line-chart>
+<div class="row">
+  <p *ngIf="workflow_name">Workflow Name : {{workflow_name}}</p>
+  <div class="col-xs-12">
+    <div id="workflow-chart">
+      <div *ngIf="loader">
+        <h3>Loading...</h3>
+      </div>
+      <div *ngIf="!loader && no_data_found">
+        <h3> No data found</h3>
+      </div>
+      <div *ngIf="!loader">
+        <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [results]="timeline_graph" [gradient]="gradient" [xAxis]="showXAxis"
+          [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel" [autoScale]="autoScale" (select)="onSelect($event)">
+        </ngx-charts-line-chart>
+      </div>
+    </div>
+  </div>
+</div>

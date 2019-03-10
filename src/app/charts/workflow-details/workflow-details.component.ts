@@ -1,10 +1,11 @@
 import {
   Component, OnInit
 } from '@angular/core';
-
+import { flatMap } from 'rxjs/operators';
+import { interval } from 'rxjs';
 import * as shape from 'd3-shape';
 import { NgxGraphModule } from '@swimlane/ngx-graph';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AppService } from '../../services/app.services';
 
 @Component({
@@ -25,27 +26,51 @@ export class WorkflowDetailsComponent implements OnInit {
   view: any[] = [1300, 300];
   to_time_param: number;
   from_time_param: number;
+  workflow_id_param: any;
+  interval: number = 4000;
+  query_params: any = {};
+  workflow_name: string;
   // curve = shape.curveLinear;
+  colorScheme = {
+    domain: ['#d9534f', '#eea236', '#4cae4c']
+  };
 
-  constructor(private appService: AppService, private route: ActivatedRoute, ) { }
+  constructor(private appService: AppService, private route: ActivatedRoute) { }
   to_time: number = new Date().setHours(new Date().getHours() - 1);
   from_time: number = +new Date();
   ngOnInit() {
     this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
     this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
+    this.workflow_id_param = this.route.snapshot.paramMap.get('workflow_id');
+    this.workflow_name = this.route.snapshot.paramMap.get('name');
   }
 
   ngAfterViewInit() {
     this.getWorkflowList();
+    this.query_params = {
+      'startTime': this.from_time_param ? this.from_time_param : this.to_time,
+      'endTime': this.to_time_param ? this.to_time_param : this.from_time,
+      'workflow': this.workflow_id_param ? this.workflow_id_param : 'user'
+    }
+    interval(this.interval)
+      .pipe(
+        flatMap(() => this.appService.getWorkflowDetails(this.query_params))
+      )
+      .subscribe((response: any) => {
+        if (Object.keys(response).length > 0) {
+          this.createDataForGraph(response);
+          console.log(this.hierarchialGraph);
+        } else {
+          this.no_data_found = true;
+        }
+        this.loader = false;
+      })
   }
   getWorkflowList() {
     this.loader = true;
-    let query_params = {
-      'startTime': this.from_time_param ? this.from_time_param : this.to_time,
-      'endTime': this.to_time_param ? this.to_time_param : this.from_time,
-      'workflow': 'user'
-    }
-    this.appService.getWorkflowDetails(query_params).subscribe((response: any) => {
+
+    this.loader = true;
+    this.appService.getWorkflowDetails(this.query_params).subscribe((response: any) => {
       if (Object.keys(response).length > 0) {
         this.createDataForGraph(response);
         console.log(this.hierarchialGraph);
@@ -68,33 +93,69 @@ export class WorkflowDetailsComponent implements OnInit {
     if (temp_nodes.length > 0) {
       let flags = {};
 
-      let node_ids = temp_nodes.filter(function (entry) {
-        if (flags[entry.spanId]) {
-          return false;
-        }
-        flags[entry.spanId] = true;
-        return true;
-      });
-      for (var i = 0; i < node_ids.length; i++) {
+      // let node_ids = temp_nodes.filter(function (entry) {
+      //   if (flags[entry.spanId]) {
+      //     return false;
+      //   }
+      //   flags[entry.spanId] = true;
+      //   return true;
+      // });
+      // console.log(node_ids);
+      console.log(temp_nodes);
+      for (var i = 0; i < api_keys.length; i++) {
         let exceptions = [];
-        temp_nodes.forEach((node) => {
-          if (node.spanId === node_ids[i].spanId) {
-            if (node.exception) {
-              exceptions.push(node.exception);
+        response[api_keys[i]].nodeInfoModels.forEach((node, index) => {
+          if (node.exception) {
+            if (!temp_nodes[index].exception_array) {
+              temp_nodes[index].exception_array = [{
+                exception_id: node.spanId,
+                timeStamp: node.timeStamp,
+                exceptions: node.exception
+              }]
+
+            } else {
+              temp_nodes[index].exception_array.push({
+                exception_id: node.spanId,
+                timeStamp: node.timeStamp,
+                exceptions: node.exception
+              });
             }
-          };
+            console.log(node.timeStamp);
+            temp_nodes[index].timeStamp = node.timeStamp;
+          }
         });
-        nodes.push({
-          'id': temp_nodes[i].spanId,
-          'exception': exceptions,
-          'fail': exceptions.length,
-          'total': api_keys.length,
-          'label': exceptions.length + '/' + api_keys.length,
-
-          'color': this._getColor(exceptions.length, api_keys.length)
-
-        });
+        // console.log(node_ids[i].spanId);
+        // temp_nodes.forEach((node) => {
+        //   // console.log(node.spanId);
+        //   if (node.spanId === node_ids[i].spanId) {
+        //     // console.log(node);
+        //     if (node.exception) {
+        //       exceptions.push(node.exception);
+        //     }
+        //   };
+        // });
+        // nodes.push({
+        //   'id': temp_nodes[i].spanId,
+        //   'exception': exceptions,
+        //   'fail': exceptions.length,
+        //   'total': api_keys.length,
+        //   'label': exceptions.length + '/' + api_keys.length,
+        //   'color': this._getColor(exceptions.length, api_keys.length)
+        // });     
       }
+      for (var i = 0; i < temp_nodes.length; i++) {
+        let len = temp_nodes[i].exception_array ? temp_nodes[i].exception_array.length : 0;
+        let node1 = {
+          'id': temp_nodes[i].spanId,
+          'exception_array': temp_nodes[i].exception_array,
+          'timeStamp': temp_nodes[i].timeStamp,
+          'fail': len,
+          'total': api_keys.length,
+          'label': len + '/' + api_keys.length,
+          'color': this._getColor(len, api_keys.length)
+        }
+        temp_nodes[i] = node1;
+      };
     }
     if (temp_links.length > 0) {
       for (var i = 0; i < temp_links.length; i++) {
@@ -105,10 +166,10 @@ export class WorkflowDetailsComponent implements OnInit {
       }
 
     }
-    console.log(nodes);
+    // console.log(nodes);
     // console.log(temp_links);
     this.hierarchialGraph.links = temp_links;
-    this.hierarchialGraph.nodes = nodes;
+    this.hierarchialGraph.nodes = temp_nodes;
 
   }
   getErrorLogs(id: any) {
