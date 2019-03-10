@@ -27,11 +27,11 @@ const routes: Routes = [
           breadcrumb: 'Workflow'
         }
       },
-      {
-        path: 'timeline', component: ApiTimelinesComponent, data: {
-          breadcrumb: 'ApiTimelinesComponent'
-        }
-      },
+      // {
+      //   path: 'timeline', component: ApiTimelinesComponent, data: {
+      //     breadcrumb: 'ApiTimelinesComponent'
+      //   }
+      // },
       // {
       //   path: 'request', component: RequestMapComponent, data: {
       //     breadcrumb: 'RequestMapComponent'
