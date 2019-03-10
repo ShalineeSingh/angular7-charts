@@ -9,8 +9,8 @@
         <h3> No data found</h3>
       </div>
       <div *ngIf="!loader">
-        <ngx-charts-pie-chart [view]="view" [scheme]="colorScheme" [results]="workflow_usage_data" [legend]="showLegend" [explodeSlices]="explodeSlices"
-          [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
+        <ngx-charts-pie-chart [view]="view" [animations]="false" [scheme]="colorScheme" [results]="workflow_usage_data" [legend]="showLegend"
+          [explodeSlices]="explodeSlices" [labels]="showLabels" [doughnut]="doughnut" [gradient]="gradient" (select)="onSelect($event)">
         </ngx-charts-pie-chart>
       </div>
     </div>

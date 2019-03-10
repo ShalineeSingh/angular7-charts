@@ -19,9 +19,9 @@ export class RequestMapComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Days';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Microservices';
 
   colorScheme = {
     domain: ['#d9534f', '#eea236', '#4cae4c']

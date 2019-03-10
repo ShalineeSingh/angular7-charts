@@ -39,19 +39,21 @@ export class WorkflowDetailsComponent implements OnInit {
   to_time: number = new Date().setHours(new Date().getHours() - 1);
   from_time: number = +new Date();
   ngOnInit() {
-    this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
-    this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
-    this.workflow_id_param = this.route.snapshot.paramMap.get('workflow_id');
-    this.workflow_name = this.route.snapshot.paramMap.get('name');
+    this.to_time_param = +this.route.snapshot.queryParams['to_time'];
+    this.from_time_param = +this.route.snapshot.queryParams['from_time'];
+    this.workflow_id_param = this.route.snapshot.queryParams['workflow_id'];
+    this.workflow_name = this.route.snapshot.queryParams['name'];
   }
 
   ngAfterViewInit() {
-    this.getWorkflowList();
+
     this.query_params = {
-      'startTime': this.from_time_param ? this.from_time_param : this.to_time,
-      'endTime': this.to_time_param ? this.to_time_param : this.from_time,
-      'workflow': this.workflow_id_param ? this.workflow_id_param : 'user'
+      'startTime': '1352148429518', 'endTime': '1652268499534',
+      // 'startTime': this.from_time_param ? this.from_time_param : this.to_time,
+      // 'endTime': this.to_time_param ? this.to_time_param : this.from_time,
+      'workflow': this.workflow_name ? this.workflow_name : 'user'
     }
+    this.getWorkflowList();
     interval(this.interval)
       .pipe(
         flatMap(() => this.appService.getWorkflowDetails(this.query_params))
@@ -59,7 +61,6 @@ export class WorkflowDetailsComponent implements OnInit {
       .subscribe((response: any) => {
         if (Object.keys(response).length > 0) {
           this.createDataForGraph(response);
-          console.log(this.hierarchialGraph);
         } else {
           this.no_data_found = true;
         }
@@ -73,7 +74,6 @@ export class WorkflowDetailsComponent implements OnInit {
     this.appService.getWorkflowDetails(this.query_params).subscribe((response: any) => {
       if (Object.keys(response).length > 0) {
         this.createDataForGraph(response);
-        console.log(this.hierarchialGraph);
       } else {
         this.no_data_found = true;
       }
@@ -151,7 +151,8 @@ export class WorkflowDetailsComponent implements OnInit {
           'timeStamp': temp_nodes[i].timeStamp,
           'fail': len,
           'total': api_keys.length,
-          'label': len + '/' + api_keys.length,
+          'label': temp_nodes[i].methodName,
+          'label2': temp_nodes[i].methodName,
           'color': this._getColor(len, api_keys.length)
         }
         temp_nodes[i] = node1;

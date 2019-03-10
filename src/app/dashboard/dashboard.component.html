@@ -28,12 +28,12 @@
   <app-request-map></app-request-map>
   <div id="panel-group">
     <div class="panel panel-default" *ngFor="let workflow of workflow_list; let i = index">
-      <div class="panel-heading cursor-pointer" (click)="goToDetails($event, workflow.id,workflow.workflowName)">
+      <div class="panel-heading cursor-pointer" (click)="goToDetails($event, workflow.id, workflow.workflowName)">
         <h5 class="panel-title">
           <!-- <i class='glyphicon' [class.glyphicon-chevron-right]="i != current" [class.glyphicon-chevron-down]="i == current"></i> -->
           <span [innerText]="workflow.workflowName"></span>
           <span class="pull-right">
-            <button type="button" class="btn btn-xs btn-primary" (click)="goToDetails($event, workflow.id,workflow.workflowName)">View Details</button>
+            <button type="button" class="btn btn-xs btn-primary" (click)="goToDetails($event, workflow.id, workflow.workflowName)">View Details</button>
           </span>
         </h5>
       </div>

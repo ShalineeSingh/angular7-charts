@@ -12,6 +12,13 @@
         <ngx-charts-heat-map [view]="view" [scheme]="colorScheme" [results]="request_map" [legend]="showLegend" [gradient]="gradient"
           [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
           [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+          <ng-template #tooltipTemplate let-model="model">
+            <!-- fields are series/name/value -->
+            <div class="tt">
+              <p>{{ model.value }} % Passed</p>
+              <p> {{100 - model.value}} % Failed</p>
+            </div>
+          </ng-template>
         </ngx-charts-heat-map>
       </div>
     </div>

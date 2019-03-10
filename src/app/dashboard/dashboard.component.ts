@@ -15,9 +15,9 @@ export class DashboardComponent implements OnInit {
   current: number = 0;
   loader: boolean = true;
   no_data_found: boolean = false;
-  to_date: Date = new Date();
+  to_date: Date = new Date(new Date().setDate(new Date().getDate() - 1));
   from_date: Date = new Date();
-  to_time: Date = new Date(new Date().setHours(new Date().getHours() - 1));
+  to_time: Date = new Date();
   from_time: Date = new Date();
   constructor(private appService: AppService, private router: Router) { }
 
@@ -42,6 +42,7 @@ export class DashboardComponent implements OnInit {
     let from_date_time = this.from_date.setHours(this.from_time.getHours(), this.from_time.getMinutes());
     event.preventDefault();
     event.stopPropagation();
+    console.log(name);
     this.router.navigate(['/details/workflow'], { queryParams: { 'to_time': to_date_time, 'from_time': from_date_time, workflow_id: workflow_id, name: name }, queryParamsHandling: "merge" });
   }
 }

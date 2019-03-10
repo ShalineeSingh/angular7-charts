@@ -39,17 +39,17 @@ export class ApiTimelinesComponent implements OnInit {
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
-    this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
-    this.workflow_id_param = this.route.snapshot.paramMap.get('workflow_id');
-    this.workflow_name = this.route.snapshot.paramMap.get('name');
+    this.to_time_param = +this.route.snapshot.queryParams['to_time'];
+    this.from_time_param = +this.route.snapshot.queryParams['from_time'];
+    this.workflow_id_param = this.route.snapshot.queryParams['workflow_id'];
+    this.workflow_name = this.route.snapshot.queryParams['name'];
   }
   ngAfterViewInit() {
     this.getTimelineDetails();
     this.query_params = {
       'startTime': this.from_time_param ? this.from_time_param : this.to_time,
       'endTime': this.to_time_param ? this.to_time_param : this.from_time,
-      'workflow': this.workflow_id_param ? this.workflow_id_param : 'user'
+      'workflow': this.workflow_name ? this.workflow_name : 'user'
     }
     interval(this.interval)
       .pipe(

@@ -37,25 +37,25 @@ export class WorkflowUsageComponent implements OnInit {
   constructor(private appService: AppService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.to_time_param = +this.route.snapshot.paramMap.get('to_time');
-    this.from_time_param = +this.route.snapshot.paramMap.get('from_time');
-    this.workflow_id_param = this.route.snapshot.paramMap.get('workflow_id');
-    this.workflow_name = this.route.snapshot.paramMap.get('name');
+    this.to_time_param = +this.route.snapshot.queryParams['to_time'];
+    this.from_time_param = +this.route.snapshot.queryParams['from_time'];
+    this.workflow_id_param = this.route.snapshot.queryParams['workflow_id'];
+    this.workflow_name = this.route.snapshot.queryParams['name'];
   }
   ngAfterViewInit() {
-    this.getWorkflowUsage();
     this.query_params = {
       'startTime': this.from_time_param ? this.from_time_param : this.to_time,
       'endTime': this.to_time_param ? this.to_time_param : this.from_time,
-      'workflow': this.workflow_id_param ? this.workflow_id_param : 'user'
+      'workflow': this.workflow_name ? this.workflow_name : 'user'
     }
+    this.getWorkflowUsage();
     interval(this.interval)
       .pipe(
         flatMap(() => this.appService.getWorkflowUsageDetails(this.query_params))
       )
       .subscribe((response: any) => {
-        if (response) {
-          this.workflow_usage_data = response.data;
+        if (response.length > 0) {
+          this.workflow_usage_data = response;
         } else {
           this.no_data_found = true;
         }
@@ -66,7 +66,7 @@ export class WorkflowUsageComponent implements OnInit {
     this.loader = true;
     this.appService.getWorkflowUsageDetails(this.query_params).subscribe((response: any) => {
       if (response) {
-        this.workflow_usage_data = response.data;
+        this.workflow_usage_data = response;
       } else {
         this.no_data_found = true;
       }
