@@ -151,6 +151,7 @@ export class WorkflowDetailsComponent implements OnInit {
           'timeStamp': temp_nodes[i].timeStamp,
           'fail': len,
           'total': api_keys.length,
+          'tooltip': 'Failed : ' + len + ' | Total : ' + api_keys.length,
           'label': temp_nodes[i].methodName,
           'label2': temp_nodes[i].methodName,
           'color': this._getColor(len, api_keys.length)
